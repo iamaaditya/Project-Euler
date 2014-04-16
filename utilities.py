@@ -4,6 +4,9 @@ Created on Thu Apr 03 23:50:56 2014
 
 @author: aaditya prakash
 """
+import re
+import numpy as np
+from collections import deque
 
 def Fibonacci():
     """ generator function to generate infinite values of fib series """
@@ -174,3 +177,106 @@ def Abundant(number=1):
         if IsAbundant(number):
             yield number
         number += 1
+
+def Longest_Repeating_Sub_String(strIn):
+    largest = ''
+    i = 1
+    
+    while 1:
+        m = re.search("(" + ("\w" * i) + ").*\\1.*\\1", strIn)
+        if not m:
+            break
+        largest = m.group(1)
+        i += 1
+    return largest
+    
+def Length_Recurring_Cycle(nu, de):
+    """ Returns the length of recurring decimal cycle for the fraction
+    'nu(merator)'/'de(nominator)' """
+    
+    x = 10 * nu % de
+    count = 0
+    y=x
+    for c in xrange(de):
+        y = 10*y % de
+        count += 1
+        if(y == x):
+            return count
+    return 0
+    
+def Make_Spiral_Matrix(n):
+    """ Retuns a Spiral Matrix, of NxN, puts values starting at 1 from
+    the center and moves to right clockwise """
+    dx,dy = 1,0            # Starting increments
+    x,y = 0,0              # Starting location
+    myarray = [[None]* n for j in range(n)]
+    for i in xrange(n**2, 0, -1):
+        myarray[x][y] = i
+        nx,ny = x+dx, y+dy
+        if 0<=nx<n and 0<=ny<n and myarray[nx][ny] == None:
+            x,y = nx,ny
+        else:
+            dx,dy = -dy,dx
+            x,y = x+dx, y+dy
+    return np.fliplr(np.matrix(myarray).transpose())
+    
+def Linear_Combinations(S, n, m):
+    """ Returns the total possiblity of making linear combinations of m elements 
+    of list 'S' to make a total of 'n' """
+    
+    if n==0: return 1
+    if n<0: return 0
+    if m <=0 and n >= 1: return 1
+        
+    return Linear_Combinations(S, n, m-1) + Linear_Combinations(S, n-S[m], m)
+    
+def Reduce_Fraction(num, den):
+    """ ** USE fractions.Fraction instead **
+    Returns the reduced form of the given fraction as 'num' and 'den' 
+    assumes num <= den
+    """
+    
+    newNum = num
+    newDen = den
+    numFactors = sorted(AllFactors(num), reverse=True)[:-1]
+    #print(numFactors)
+    for i in  range(len(numFactors)):
+        f = numFactors[i]
+        if (newDen % f == 0 and newNum % f == 0):
+            #print 'Before: ' , newNum, newDen, f            
+            newNum //= f
+            newDen //= f
+            #print 'After: ' , newNum, newDen, f            
+    return newNum, newDen
+    
+def IsCircularPrime(num):
+    """ Checks if the given number is circular prime
+    - all combinations of given number is prime """
+    
+    a = str(num)
+    n = len(a)
+
+    llC = [[a[i - j] for i in range(n)] for j in range(n)]
+    
+    for l in llC:
+        lNum = int(''.join(l))
+        if(not isPrime(lNum)): return False 
+    return True
+    
+def Eratosthenes():
+	'''Yields the sequence of prime numbers via the Sieve of Eratosthenes.
+    ** This code is due to David Eppstein, UC Irvine **     
+     '''
+	D = {}  # map composite integers to primes witnessing their compositeness
+	q = 2   # first integer to test for primality
+	while 1:
+		if q not in D:
+			yield q        # not marked composite, must be prime
+			D[q*q] = [q]   # first multiple of q not already marked
+		else:
+			for p in D[q]: # move each witness to its next multiple
+				D.setdefault(p+q,[]).append(p)
+			del D[q]       # no longer need D[q], free memory
+		q += 1
+    
+    

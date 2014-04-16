@@ -11,11 +11,6 @@ import math
 import itertools
 
 alphabet = ['0','1','2','3', '4', '5', '6', '7', '8', '9']
-
-combos = itertools.permutations(alphabet, 10)
-
-usable_combos = []
-for e in combos:
-    usable_combos.append(e)
-
-print usable_combos[1000000-1]
+ns = ''.join(alphabet)
+for p1, p2, prod in [[int(ns[0:a]), int(ns[a:b]), int(ns[b:])] for a, b in [(2, 5), (1, 5)]]:
+    print p1, p2, prod, a, b
