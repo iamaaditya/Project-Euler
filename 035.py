@@ -18,6 +18,7 @@ def Number_Circular_Primes(nLimit):
     """ Returns the number of circular primes below nLimit """
     count = 0    
     for i in xrange(2,nLimit):
+        if i % 2 == 0: continue
         if(utilities.isPrime(i)): 
             if(utilities.IsCircularPrime(i)):
                 count += 1

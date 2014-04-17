@@ -20,6 +20,7 @@ def Fibonacci():
 
 def isPrime(n):
     """ returns true if given number is prime, false otherwise """
+    if(n < 2): return False    
     for i in range(2,int(n**0.5)+1):
         if n%i==0:
             return False
@@ -278,5 +279,16 @@ def Eratosthenes():
 				D.setdefault(p+q,[]).append(p)
 			del D[q]       # no longer need D[q], free memory
 		q += 1
+  
+def IsPalindrome(s):
+    """ Checks if the given string 's' is palindrome """
+    sR = s[::-1]
+    return s==sR
     
-    
+def IsTrunctablePrime(num):
+    """ Checks if the given PRIME number is Trunctable Prime on both direction """
+    for i in range(1,len(str(num))):
+        if(not isPrime(num//(10**i))): return False
+    for i in range(1, len(str(num))):
+        if(not isPrime(num % (10**i))): return False
+    return True    
