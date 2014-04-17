@@ -48,7 +48,6 @@ def Champernowne_Constant():
     
     for i in range(7):
         prod *= int(Nth_frac(10**i))
-    
     return prod
     
         
@@ -58,7 +57,7 @@ timeStart = time.clock()
 print(Champernowne_Constant())
 #print(Nth_frac(21))
 print('Time (sec):' + str(time.clock() - timeStart))
-answer = ''
+answer = '210'
 
 
 

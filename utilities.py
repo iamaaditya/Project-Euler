@@ -7,6 +7,7 @@ Created on Thu Apr 03 23:50:56 2014
 import re
 import numpy as np
 from collections import deque
+from itertools import permutations 
 
 def Fibonacci():
     """ generator function to generate infinite values of fib series """
@@ -292,3 +293,22 @@ def IsTrunctablePrime(num):
     for i in range(1, len(str(num))):
         if(not isPrime(num % (10**i))): return False
     return True    
+    
+def Generate_n_Pandigit_Number(n):
+    """ Returns a pan digit number containing 1..'n' digits """
+    digits = [str(i) for i in xrange(n, 0, -1)]
+
+    for num in permutations(digits):
+        yield int(''.join(num))
+    
+def Generate_n_Pandigit_Number_Prime(n):
+    """ Returns a pan digit number containing 1..'n' digits """
+    digits = [str(i) for i in xrange(n, 0, -1)]
+
+    for num in permutations(digits, len(digits)-1):
+        ln = list(num)
+        if('1' not in ln): ln.append('1')
+        elif('3' not in ln): ln.append('3')
+        elif('7' not in ln): ln.append('7')
+        else: continue
+        yield  int(''.join(ln))
