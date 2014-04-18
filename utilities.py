@@ -5,9 +5,10 @@ Created on Thu Apr 03 23:50:56 2014
 @author: aaditya prakash
 """
 import re
-import numpy as np
+#import numpy as np
 from collections import deque
 from itertools import permutations 
+import math
 
 def Fibonacci():
     """ generator function to generate infinite values of fib series """
@@ -312,3 +313,27 @@ def Generate_n_Pandigit_Number_Prime(n):
         elif('7' not in ln): ln.append('7')
         else: continue
         yield  int(''.join(ln))
+
+def Pentagonal_Numbers():
+    """ Generator function for pentagonal numbers 
+    Pn = n*(3n-1)/2 """
+    
+    n = 0    
+    while True:
+        n+= 1
+        yield n*(3*n -1)/2
+
+def IsPentagonal(n):
+    """ Checks if the given number 'n' is pentagonal """
+    check = (math.sqrt(24*n + 1) + 1)/6
+    return int(check) == check
+
+def IsTriangular(n):
+    """ Checks if the given number 'n' is pentagonal """
+    check = (math.sqrt(8*n + 1) - 1)/2
+    return int(check) == check
+        
+def IsHexagonal(n):
+    """ Checks if the given number 'n' is hexagonal """
+    check = (math.sqrt(8*n + 1) + 1)/4
+    return int(check) == check

@@ -10,7 +10,17 @@ import math
 
 import itertools
 
-alphabet = ['0','1','2','3', '4', '5', '6', '7', '8', '9']
-ns = ''.join(alphabet)
-for p1, p2, prod in [[int(ns[0:a]), int(ns[a:b]), int(ns[b:])] for a, b in [(2, 5), (1, 5)]]:
-    print p1, p2, prod, a, b
+def check_dif(dif):
+    min_n, b, a = 2, 2, 3
+    while a * min_n - b <= dif:
+        if (dif + b) % a == 0:
+            yield (a, b)
+        b += 2 + 3 * (min_n - 1)
+        min_n += 1
+        a = 3 * (min_n - 1)
+    return
+    
+for i in check_dif(10000):
+    print i
+
+

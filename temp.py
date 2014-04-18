@@ -9,7 +9,7 @@ import math
 
 import time
 
-import numpy as np
+#import numpy as np
 
 import itertools
 from itertools import permutations
@@ -19,11 +19,13 @@ from fractions import gcd
 timeStart = time.clock()
 
 
-s = '1'
+import numpy as np
+import math
 
-for i in range(len(s)):
-    print s[i:] + s[:i]
+iT = uu.TriangleNumber(285+1)
 
-
+for i in range(10):
+    nT = iT.next()
+    print nT, uu.IsTriangular(nT), uu.IsTriangular(nT+3)
 
 print('Time (sec):' + str(time.clock() - timeStart))
