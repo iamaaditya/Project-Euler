@@ -10,7 +10,7 @@ import time
 import EXTUtilities as EXT
 import math
 
-problem_number = '044'
+problem_number = '046'
 problem_statement = """
 What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 """
@@ -59,6 +59,6 @@ def GoldBach_Other_Conjecture_FAST():
 timeStart = time.clock()
 print(GoldBach_Other_Conjecture_FAST())
 print('Time (sec):' + str(time.clock() - timeStart))
-answer = ''
+answer = '5777'
 
 

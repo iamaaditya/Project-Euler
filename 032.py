@@ -23,8 +23,8 @@ def Sum_Products_Pandigital_MMM(n=9):
     setPanProducts = set()    
     limit = sum([(n)*(10**i) for i in range(n//2)])
     loop = 0
-    for multiplier in xrange(limit//2 + 2):
-        for multiplicand in xrange(multiplier, limit//multiplier + 1):
+    for multiplier in range(limit//2 + 2):
+        for multiplicand in range(multiplier, limit//multiplier + 1):
             loop += 1
             product = multiplier * multiplicand
             productDigitsSet = set(map(int, str(str(multiplier)+str(multiplicand) + str(product))))

@@ -9,6 +9,7 @@ import re
 from collections import deque
 from itertools import permutations 
 import math
+from functools import reduce
 
 def Fibonacci():
     """ generator function to generate infinite values of fib series """
@@ -134,6 +135,20 @@ def AllFactors(number):
     returns SET and is not necessarily monotonic"""
     return set(reduce(list.__add__, 
                 ([i, number//i] for i in range(1, int(number**0.5) + 1) if number % i == 0)))
+
+def PrimeFactorsSet(number):
+    """ Returns all the factors of the given number, very effficient code
+    returns SET and is not necessarily monotonic"""
+    #return set(reduce(list.__add__,
+    #            ([i, number] for i in range(1, int(number**0.5) + 1) if number % i == 0 )))
+    return set( i for i in range(1, int(number//2) + 1) if number % i == 0 and isPrime(i))
+
+def NumberOfPrimeFactors(number):
+    lenP = 0
+    for i in range(1, int(number//2) + 1):
+        if number % i == 0 and isPrime(i):
+            lenP +=1
+    return lenP
 
 def TriangleNumber(number):
     """ Generator Function to generate Triangle Numbers starting from 'number' """

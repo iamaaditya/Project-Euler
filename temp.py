@@ -10,20 +10,11 @@ import math
 
 import time
 
-#import numpy as np
+import utilities as u
 
-import itertools
-from itertools import permutations
-from itertools import product
-from itertools import combinations
-from fractions import gcd
-timeStart = time.clock()
+print(u.PrimeFactorsSet(645))
+print(u.NumberOfPrimeFactors(645))
 
+print(u.AllFactors(645))
 
-import numpy as np
-import math
-
-for i in xrange(20000,90000):
-    if ex.is_square(i): print i, math.sqrt(i)
-
-print('Time (sec):' + str(time.clock() - timeStart))
+print(u.isPrimeFast(43))
