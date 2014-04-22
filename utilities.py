@@ -43,7 +43,7 @@ def isPrimeFast(n):
          k += 2
     return True
 
-def Prime(number):
+def Prime(number=2):
     """ generator function to generate infinite values of prime numbers starting from 'number' """
     while True:
         if isPrime(number):

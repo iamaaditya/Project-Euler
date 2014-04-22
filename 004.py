@@ -6,7 +6,6 @@ Created on Fri Apr 04 21:53:54 2014
 """
 
 import utilities
-import math
 
 problem_number = '004'
 problem_statement = """A palindromic number reads the same both ways.

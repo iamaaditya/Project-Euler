@@ -55,3 +55,23 @@ def is_prime(n, _precision_for_huge_n=16):
 
 _known_primes = [2, 3]
 _known_primes += [x for x in range(5, 1000, 2) if is_prime(x)]
+
+
+def is_square(apositiveint):
+  """ Efficient and non floating reliant code to check if a given
+  number is a perfect square
+  Source: Alex Martelli 
+  http://stackoverflow.com/questions/2489435/how-could-i-check-if-a-number-is-a-perfect-square """
+  #print(apositiveint)
+  if(apositiveint==1): return True
+  x = apositiveint // 2
+  seen = set([x])
+  while x * x != apositiveint:
+    try:
+        x = (x + (apositiveint // x)) // 2
+    except ZeroDivisionError:
+        return False
+
+    if x in seen: return False
+    seen.add(x)
+  return True

@@ -5,6 +5,7 @@ Created on Thu Apr 03 22:29:02 2014
 @author: owner2
 """
 import utilities as uu
+import EXTUtilities as ex
 import math
 
 import time
@@ -22,10 +23,7 @@ timeStart = time.clock()
 import numpy as np
 import math
 
-iT = uu.TriangleNumber(285+1)
-
-for i in range(10):
-    nT = iT.next()
-    print nT, uu.IsTriangular(nT), uu.IsTriangular(nT+3)
+for i in xrange(20000,90000):
+    if ex.is_square(i): print i, math.sqrt(i)
 
 print('Time (sec):' + str(time.clock() - timeStart))
