@@ -12,37 +12,23 @@ import time
 
 import utilities as u
 
-from time import time
+import time
 from math import sqrt
-
+import itertools
 from itertools import permutations
 from itertools import combinations
+from scipy.misc import factorial
+
+timeStart = time.clock()
+N = 100
+fact = [1] * (N+1)
+for i in range(2, N+1):
+    fact[i] = fact[i-1] * i
+
+def choose(n, r):
+    return (fact[n]/fact[r]/fact[n-r])
+
+print (sum(sum(1 if (choose(n,r) > 1000000) else 0 for r in range(0,n+1)) for n in range(0,N+1)))
 
 
-#121313
-#[121313, 222323, 323333, 424343, 525353, 626363, 828383, 929393]
-import itertools
-
-ss = '121313'
-a = 2
-b = 4
-
-ls = list(ss)
-#itertools.product([i for i in range(len(ss))], [i for i in range(len(ss))], [i for i in range(len(ss))]):
-for a,b,c in [[0,2,4]]:
-    #print(a,b,c)
-    count = 0
-    for d in '0123456789':
-        ls[a], ls[b] , ls[c]= d, d, d
-        num = int(''.join(ls))
-        print(num, uu.isPrimeFast(num))
-        if(uu.isPrimeFast(num)):
-            count +=1
-            #print(num)
-        # else:
-        #     print(num, d)
-        if(count >= 8):
-            print(count, a, b, c,d, num)
-# c = '12342522233'
-# for d in ex.list_duplicates(c):
-#     print(d)
+print('Time (sec):' + str(time.clock() - timeStart))
