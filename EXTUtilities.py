@@ -75,3 +75,26 @@ def is_square(apositiveint):
     if x in seen: return False
     seen.add(x)
   return True
+
+def find_all(a_str, sub):
+    """ Find all instnaces of a given substring in a given string
+    http://stackoverflow.com/questions/4664850/find-all-occurrences-of-a-substring-in-python
+    """
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        start += len(sub)
+
+def list_duplicates(seq):
+  """ Returns the duplicate items in the list
+   http://stackoverflow.com/a/9836685/1189865
+  """
+
+  seen = set()
+  seen_add = seen.add
+  # adds all elements it doesn't know yet to seen and all other to seen_twice
+  seen_twice = set( x for x in seq if x in seen or seen_add(x) )
+  # turn the set into a list (as requested)
+  return list( seen_twice )
