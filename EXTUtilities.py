@@ -9,6 +9,7 @@ Collection of extemely useful python functions, collected from internet
 *** These are not written by me and I have pointed the source for each
 """
 
+from functools import reduce
 
 #PRIMALITY TESTING
 
@@ -98,3 +99,30 @@ def list_duplicates(seq):
   seen_twice = set( x for x in seq if x in seen or seen_add(x) )
   # turn the set into a list (as requested)
   return list( seen_twice )
+
+def sum_digits(n):
+    """
+    Function that returns the sum of the digits,
+    This is much faster than converting the int to str and using map
+    http://stackoverflow.com/a/14940026/1189865
+    """
+    r = 0
+    while n:
+        r, n = r + n % 10, n // 10
+    return r
+
+# following three functions
+# source: http://stackoverflow.com/a/147539/1189865
+def gcd(a, b):
+    """Return greatest common divisor using Euclid's Algorithm."""
+    while b:
+        a, b = b, a % b
+    return a
+
+def lcm(a, b):
+    """Return lowest common multiple."""
+    return a * b // gcd(a, b)
+
+def lcmm(*args):
+    """Return lcm of args."""
+    return reduce(lcm, args)

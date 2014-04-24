@@ -228,7 +228,7 @@ def Make_Spiral_Matrix(n):
     dx,dy = 1,0            # Starting increments
     x,y = 0,0              # Starting location
     myarray = [[None]* n for j in range(n)]
-    for i in xrange(n**2, 0, -1):
+    for i in range(n**2, 0, -1):
         myarray[x][y] = i
         nx,ny = x+dx, y+dy
         if 0<=nx<n and 0<=ny<n and myarray[nx][ny] == None:
