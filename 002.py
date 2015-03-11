@@ -19,7 +19,9 @@ iterFib = utilities.Fibonacci()
 def sum_even_fib(parameter):
     sum = 0
     while True:
-        fib = iterFib.next()
+        #fib = iterFib.next()
+        # changes for the python 3
+        fib = next(iterFib)
 
         if fib > parameter :
             break

@@ -11,6 +11,15 @@ from itertools import permutations
 import math
 from functools import reduce
 
+def is_square(i):
+    x = i // 2
+    seen = set([x])
+    while x * x != i:
+        x = (x + (i // x) ) // 2
+        if x in seen: return False
+        seen.add(x)
+    return True
+
 def Fibonacci():
     """ generator function to generate infinite values of fib series """
     a,b = 0,1
