@@ -66,7 +66,7 @@ def count_lexico_simple(n):
                 if before and after:
                     term = (lowercase.index(s) - lowercase.index(f) -1 )
                     #print "*", (lowercase.index(s) - lowercase.index(f)  )
-                    #count += choose_nkp(num_of_chars_greater_than_f, after, before) * choose_nkp(num_of_chars_smaller_than_s, before, after)
+                    count += choose_nkp(num_of_chars_greater_than_f, after, before) * choose_nkp(num_of_chars_smaller_than_s, before, after)
                     pass
                 else:
                     pass
