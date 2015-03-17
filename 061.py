@@ -1,4 +1,5 @@
 # Project Euler problem 61
+from time import time
 
 def make_polygon(sides):
     n = 1
@@ -63,7 +64,8 @@ def search_solution():
                 if sols[0][3] == sols[-1][2] and len(sols)==6:
                     print sum([i[1] for i in sols])
                     return
-
+start_time = time()
 search_solution()
-
+end_time = time() - start_time 
+print "Program took " + str(end_time) + " seconds "
 
