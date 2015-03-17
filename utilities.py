@@ -30,6 +30,12 @@ def Fibonacci():
         yield b
 
 
+def generate_cube(start):
+    """ yields cubes starting from start^3"""
+    while True:
+        yield start**3
+        start += 1
+
 def isPrime(n):
     """ returns true if given number is prime, false otherwise """
     if(n < 2): return False    
@@ -177,9 +183,17 @@ def LengthCollatz(number):
             number = 3*number + 1
         leng += 1
 
-def SumDigits(Number):
+def SumDigits_slow(Number):
     """ Returns the sum of the digits of a given number """
     return sum(map(int, str(Number)))
+
+def SumDigits(n):
+    """ source StackOverflow """
+    r = 0
+    while n:
+        r,n = r + n%10, n / 10
+    return r
+
     
 def NumberToWord(Number):
     """ Returns the given number in Word. Number < 100 assumed """
