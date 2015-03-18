@@ -62,7 +62,7 @@ def isPrimeFast(n):
 def Prime(number=2):
     """ generator function to generate infinite values of prime numbers starting from 'number' """
     while True:
-        if isPrime(number):
+        if isPrimeFast(number):
             yield number
         number += 1
 
@@ -375,3 +375,18 @@ def IsHexagonal(n):
     """ Checks if the given number 'n' is hexagonal """
     check = (math.sqrt(8*n + 1) + 1)/4
     return int(check) == check
+
+def totient_function(n):
+    """ returns the value of totient function, uses 
+    Euler's formula, and vast prime checking methods"""
+
+    if isPrimeFast(n): return n-1
+    prime_list = PrimeList(n)
+    total = 1
+    for p in prime_list:
+        if n % p == 0: 
+            total *= (1 - 1/p)
+
+    return total*n
+
+
