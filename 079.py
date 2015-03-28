@@ -1,80 +1,50 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 28 01:09:53 EDT 2015
+
+@author: aaditya prakash
+"""
+
+from utilities import find_all
+from time import clock
+from string import digits
+from itertools import permutations
+
+problem_number = '079'
+problem_statement = """
+Given that the three characters are always asked for in order, analyse the file so as to determine the shortest possible secret passcode of unknown length
+"""
 
 
-def main1():
-    with open('./keylog.txt') as f:
-        l = f.readlines()
-        li = map(int, l)
-        print li
-        ans = []
-        for i in l:
-            a,b,c = i.rstrip()
-            print a,b,c
-            ai, bi, ci = -1,-1,-1
-            if a not in ans: ans.append(a)
-            else: ai = ans.index(a)
-            
-            if b not in ans: ans.append(b)
-            else: bi = ans.index(b)
+def check_solution(key_list, passcode):
+    
+    for k in key_list:
+        k0 =  min(find_all(passcode, k[0]))
+        k1 = list(find_all(passcode, k[1]))
+        k2 = max(find_all(passcode, k[2]))
+        if not (k0 < max(k1) and min(k1) < k2): return False
+    else:
+        return True
+        
+def passcode_derviation():
+    """ """
+    key_list = set(read_data())
+    unique_digits_in_key_list = [d for d in digits if d in ''.join(key_list)]
+    for p in permutations(unique_digits_in_key_list):
+        if check_solution(key_list, ''.join(p)): return p
 
-            if c not in ans: ans.append(c)
-            else: ci = ans.index(c)
+def read_data():
+    """reads the given file and returns the nubmers as a list"""
 
-            if ai <= bi and bi <= ci: continue
-            
-            if ai > bi and bi > ci :
-                print a,b,c
-                print ans
-                ans.append(b)
-                ans.append(c)
-                pass
-        print ans
+    with open("./keylog.txt") as f:
+        lines = f.readlines()
 
-def find_all(a_str, sub):
-    start = 0
-    while True:
-        start = a_str.find(sub, start)
-        if start == -1: return
-        yield start
-        start += len(sub) 
+    return map(str.strip, lines)
 
-def main():
-    with open('./keylog.txt') as f:
-        l = f.readlines()
-        ans = ''
-        for i in l:
-            # add new elements, nothing more to do here
-            a,b,c = i.rstrip()
-            #print a,b,c
-            bbi = []
-            ai, bi, ci = -1,-1,-1
-            if a not in ans: ans += a
-            else: 
-                #ai = ans.rfind(a)
-                ai = min(find_all(ans, a))
-            
-            if b not in ans: ans += b
-            else: 
-                #bi = ans.rfind(b)
-                bbi = list( find_all(ans,b) )
-                #print bi
-
-            if c not in ans: ans += c
-            else: 
-                #
-                ci = max(find_all(ans,c))
-
-            #print ai,bi,ci
-            if len(bbi) == 1: bi = bbi[0]
-            
-            #if ai > bi and bi > ci :
-                #ans += b
-                #ans += c
- 
-            if ai <= min(bbi) and bi <= ci: continue
-            else: 
-                print a,b,c, bi
-
-        print ans
+timeStart = clock()
+print(passcode_derviation())
+print('Time (sec):' + str(clock() - timeStart))
+answer = ''
 
 
-main()
+

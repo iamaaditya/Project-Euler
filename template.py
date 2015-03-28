@@ -7,7 +7,7 @@ Created on
 
 import utilities
 import math
-import time
+from time import clock
 
 problem_number = ''
 problem_statement = """
@@ -18,9 +18,9 @@ def solve():
     """ """
 
 
-timeStart = time.clock()
+timeStart = clock()
 print(solve())
-print('Time (sec):' + str(time.clock() - timeStart))
+print('Time (sec):' + str(clock() - timeStart))
 answer = ''
 
 

@@ -389,4 +389,11 @@ def totient_function(n):
 
     return total*n
 
-
+def find_all(a_str, sub):
+    """ finds all the occurence of sub in a_str"""
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        start += len(sub)
