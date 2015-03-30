@@ -22,7 +22,6 @@ def counting_summations_v1(n):
     sols[2] = 2
     sols[3] = 3
 
-    
     for i in xrange(4,n+1):
         ans = 0
         for j in xrange(i-1,0,-1):
@@ -48,9 +47,10 @@ def counting_summations_v2(n):
     return sols[n]*2  
 
 def counting_summations(n):
+    """ first lets do a small number by permuating all numbers """
 
     for i in xrange(n-1, 0, -1):
-        print i
+        print i, "rem:" ,n -i
 
 timeStart = clock()
 print(counting_summations(6))
