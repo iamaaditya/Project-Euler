@@ -14,48 +14,34 @@ problem_statement = """
 How many different ways can one hundred be written as a sum of at least two positive integers?
 """
 
-def counting_summations_v1(n):
-    """ returns number of ways to counting upto n, by using atleast two positive integers"""
-
-    sols = {}
-    sols[1] = 1
-    sols[2] = 2
-    sols[3] = 3
-
-    for i in xrange(4,n+1):
-        ans = 0
-        for j in xrange(i-1,0,-1):
-            ans += sols[i-j]
-        sols[i] = ans
-        print sols
-    return sols[n] 
-
-def counting_summations_v2(n):
-    """ returns number of ways to counting upto n, by using atleast two positive integers"""
-    sols = {}
-    sols[1] = 1
-    sols[2] = 2
-    sols[3] = 3
-
-    
-    for i in xrange(4,n+1):
-        ans = 0
-        for j in xrange(i-1,int(math.ceil(n/2))-1,-1):
-            ans += sols[i-j]
-        sols[i] = ans
-        print sols
-    return sols[n]*2  
-
+sums_dict = {}
 def counting_summations(n):
     """ first lets do a small number by permuating all numbers """
 
+    sum = 0
     for i in xrange(n-1, 0, -1):
-        print i, "rem:" ,n -i
+        sum += sum_i_to_n(n-i, i) 
+    return sum
+
+def sum_i_to_n(n,i):
+    """ this function recursively calculates, number of ways to summing upto n using numbers less than and equal to i """
+    global sums_dict
+    if (n,i) in sums_dict:
+        return sums_dict[(n,i)]
+    sum = 0
+    if i <= 1 or n <= 1: 
+        return 1
+    for l in xrange(i, 0, -1):
+        if l > n: continue
+        ans = sum_i_to_n(n-l, min(l,n-l))
+        sums_dict[(n-l,min(l,n-l))] = ans
+        sum += ans
+    return sum
 
 timeStart = clock()
-print(counting_summations(6))
+print(counting_summations(100))
 print('Time (sec):' + str(clock() - timeStart))
-answer = ''
+answer = '190569291'
 
 
 

@@ -5,8 +5,6 @@ Created on
 @author: aaditya prakash
 """
 
-import utilities
-import math
 from time import clock
 
 problem_number = ''

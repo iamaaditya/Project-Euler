@@ -4,6 +4,7 @@ Created on Thu Apr 03 23:50:56 2014
 
 @author: aaditya prakash
 """
+from __future__ import division
 import re
 #import numpy as np
 from collections import deque
@@ -187,11 +188,19 @@ def SumDigits_slow(Number):
     """ Returns the sum of the digits of a given number """
     return sum(map(int, str(Number)))
 
+def GetDigits(n):
+    """ returns the digits in a list, uses only integer operations"""
+    d = []
+    while n:
+        d.append(n%10)
+        n //= 10
+    return d[::-1]
+
 def SumDigits(n):
-    """ source StackOverflow """
+    """ returns the sum of the digits, (only integer operation) source StackOverflow """
     r = 0
     while n:
-        r,n = r + n%10, n / 10
+        r,n = r + n%10, n // 10
     return r
 
     
@@ -378,7 +387,7 @@ def IsHexagonal(n):
 
 def totient_function(n):
     """ returns the value of totient function, uses 
-    Euler's formula, and vast prime checking methods"""
+    Euler's formula, and fast prime checking methods"""
 
     if isPrimeFast(n): return n-1
     prime_list = PrimeList(n)
