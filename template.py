@@ -5,6 +5,7 @@ Created on
 @author: aaditya prakash
 """
 
+from __future__ import division
 from time import clock
 
 problem_number = ''

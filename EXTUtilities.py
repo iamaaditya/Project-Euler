@@ -10,6 +10,7 @@ Collection of extemely useful python functions, collected from internet
 """
 
 from functools import reduce
+from utilities import PrimeList
 
 #PRIMALITY TESTING
 
@@ -126,3 +127,20 @@ def lcm(a, b):
 def lcmm(*args):
     """Return lcm of args."""
     return reduce(lcm, args)
+
+def totientsbelow(N):
+    """ from http://stackoverflow.com/a/14017106 """
+    # allprimes = primesbelow(N+1)
+    allprimes = PrimeList(N+1)
+    def rec(n, partialtot=1, min_p = 0):
+        for p in allprimes:
+            if p > n:
+                break
+            # avoid double solutions such as (6, [2,3]), and (6, [3,2])
+            if p < min_p: continue
+            yield (p, p-1, [p])
+            for t, tot2, r in rec(n//p, partialtot, min_p = p): # uses integer division
+                yield (t*p, tot2 * p if p == r[0] else tot2 * (p-1), [p] + r)
+
+    for n, t, factors in rec(N):
+        yield (n, t)

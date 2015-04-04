@@ -72,7 +72,7 @@ def PrimeReverse(number):
     while True:
         if number < 2:
             yield 2
-        elif isPrime(number):
+        elif isPrimeFast(number):
             yield number
         number -= 1
 
@@ -81,12 +81,19 @@ def PrimeList(number):
     iterPrime = Prime(2)
     primeList = []
     nextPrime = iterPrime.next()
-    #primeList.append(nextPrime)
-
     while nextPrime < number:
         primeList.append(nextPrime)
         nextPrime = iterPrime.next()
+    return primeList
 
+def PrimeRange(start, end):
+    """ return a list of all the prime number in the range start to end (not inclusive)"""
+    iterPrime = Prime(start)
+    primeList = []
+    nextPrime = iterPrime.next()
+    while nextPrime < end:
+        primeList.append(nextPrime)
+        nextPrime = iterPrime.next()
     return primeList
 
 def NthPrime(number):
@@ -157,12 +164,12 @@ def PrimeFactorsSet(number):
     returns SET and is not necessarily monotonic"""
     #return set(reduce(list.__add__,
     #            ([i, number] for i in range(1, int(number**0.5) + 1) if number % i == 0 )))
-    return set( i for i in range(1, int(number//2) + 1) if number % i == 0 and isPrime(i))
+    return set( i for i in range(1, int(number//2) + 1) if number % i == 0 and isPrimeFast(i))
 
 def NumberOfPrimeFactors(number):
     lenP = 0
     for i in range(1, int(number//2) + 1):
-        if number % i == 0 and isPrime(i):
+        if number % i == 0 and isPrimeFast(i):
             lenP +=1
     return lenP
 
@@ -310,7 +317,7 @@ def IsCircularPrime(num):
     
     for l in llC:
         lNum = int(''.join(l))
-        if(not isPrime(lNum)): return False 
+        if(not isPrimeFast(lNum)): return False 
     return True
     
 def Eratosthenes():
@@ -337,9 +344,9 @@ def IsPalindrome(s):
 def IsTrunctablePrime(num):
     """ Checks if the given PRIME number is Trunctable Prime on both direction """
     for i in range(1,len(str(num))):
-        if(not isPrime(num//(10**i))): return False
+        if(not isPrimeFast(num//(10**i))): return False
     for i in range(1, len(str(num))):
-        if(not isPrime(num % (10**i))): return False
+        if(not isPrimeFast(num % (10**i))): return False
     return True    
     
 def Generate_n_Pandigit_Number(n):
