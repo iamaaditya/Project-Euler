@@ -11,12 +11,11 @@ from time import clock
 
 problem_number = '071'
 problem_statement = """
-sting the set of reduced proper fractions for d ≤ 1,000,000 in ascending order of size, find the numerator of the fraction immediately to the left of 3/7.
+By listing the set of reduced proper fractions for d ≤ 1,000,000 in ascending order of size, find the numerator of the fraction immediately to the left of 3/7.
 """
 
 def ordered_fractions(D):
     """ solves 071, orders the fractions for all values less than d and returns the one before 3/7"""
-
     sols = []
     lower = 3/7 - 0.000001
     upper = 3/7 + 0.000001
