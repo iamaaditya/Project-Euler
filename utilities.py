@@ -7,10 +7,13 @@ Created on Thu Apr 03 23:50:56 2014
 from __future__ import division
 import re
 import numpy as np
-from collections import deque
 from itertools import permutations 
 import math
 from functools import reduce
+from fractions import Fraction
+from collections import defaultdict
+from itertools import count
+from operator import mul
 
 def is_square(i):
     x = i // 2
@@ -103,6 +106,35 @@ def NthPrime(number):
         nextPrime = iterPrime.next()
     return nextPrime
         
+primes_cache, prime_jumps = [], defaultdict(list)
+def primes():
+    prime = 1
+    for i in count():
+        if i < len(primes_cache): prime = primes_cache[i]
+        else:
+            prime += 1
+            while prime in prime_jumps:
+                for skip in prime_jumps[prime]:
+                    prime_jumps[prime + skip] += [skip]
+                del prime_jumps[prime]
+                prime += 1
+            prime_jumps[prime + prime] += [prime]
+            primes_cache.append(prime)
+        yield prime
+
+def factorize(n):
+    for prime in primes():
+        if prime > n: return
+        exponent = 0
+        while n % prime == 0:
+            exponent, n = exponent + 1, n / prime
+        if exponent != 0:
+            yield prime, exponent
+
+
+def totient(n):
+    return reduce(mul, ((p-1) * p ** (exp-1) for p, exp in factorize(n)), 1)
+
 def IsPalindrome(s):
     """ Checks if the given string 's' is palindrome """
     return s==s[::-1]
@@ -124,7 +156,7 @@ def PalindromeReverse(number):
     while True:
         if number < 1:
             yield 1
-        elif isPalindrome(number):
+        elif IsPalindromeInt(number):
             yield number
         number -= 1
 
