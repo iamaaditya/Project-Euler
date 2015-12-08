@@ -6,7 +6,7 @@ Created on Thu Apr 03 23:50:56 2014
 """
 from __future__ import division
 import re
-#import numpy as np
+import numpy as np
 from collections import deque
 from itertools import permutations 
 import math
@@ -103,21 +103,19 @@ def NthPrime(number):
         nextPrime = iterPrime.next()
     return nextPrime
         
+def IsPalindrome(s):
+    """ Checks if the given string 's' is palindrome """
+    return s==s[::-1]
     
-    
-def isPalindrome(s):
-    """ check if the given string is palindrome """
-    s = str(s)
-    for i in range(len(s)/2+1):
-        #print s[i], s[len(s)-1-i]
-        if s[i] != s[len(s)-1-i]:
-            return False
-    return True
+def IsPalindromeInt(n):
+    """ ABANDONED, as it turns out that covnerting to string and checking palindrome is faster than using modulo. checks if the given integer is palindrome, goes not use string conversion """
+    return IsPalindrome(str(n))
+     
 
 def Palindrome(number):
     """ generator function to generate infinite palindrome larger than given number """
     while True:
-        if isPalindrome(number):
+        if IsPalindrome(number):
             yield number
         number += 1
 
@@ -336,10 +334,6 @@ def Eratosthenes():
 			del D[q]       # no longer need D[q], free memory
 		q += 1
   
-def IsPalindrome(s):
-    """ Checks if the given string 's' is palindrome """
-    sR = s[::-1]
-    return s==sR
     
 def IsTrunctablePrime(num):
     """ Checks if the given PRIME number is Trunctable Prime on both direction """
