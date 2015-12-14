@@ -11,6 +11,7 @@ Collection of extemely useful python functions, collected from internet
 
 from functools import reduce
 from utilities import PrimeList
+import numpy as np
 
 #PRIMALITY TESTING
 
@@ -144,3 +145,30 @@ def totientsbelow(N):
 
     for n, t, factors in rec(N):
         yield (n, t)
+
+# Generating all pythagorean triples from
+# http://stackoverflow.com/questions/575117/generating-unique-ordered-pythagorean-triplets
+def gen_prim_pyth_trips(limit=None):
+    u = np.mat(' 1  2  2; -2 -1 -2; 2 2 3')
+    a = np.mat(' 1  2  2;  2  1  2; 2 2 3')
+    d = np.mat('-1 -2 -2;  2  1  2; 2 2 3')
+    uad = np.array([u, a, d])
+    m = np.array([3, 4, 5])
+    while m.size:
+        m = m.reshape(-1, 3)
+        if limit:
+            m = m[m[:, 2] <= limit]
+        # yield from m
+        for mi in m:
+            yield mi
+        m = np.dot(m, uad)
+
+def gen_all_pyth_trips(limit):
+    for prim in gen_prim_pyth_trips(limit):
+        i = prim
+        for _ in range(limit//prim[2]):
+            yield i
+            i = i + prim
+
+def test():
+    return "test success"
