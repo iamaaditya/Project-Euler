@@ -5,8 +5,6 @@ Created on Sat Mar 28 17:04:32 EDT 2015
 @author: aaditya prakash
 """
 from __future__ import division
-import utilities
-import math
 from time import clock
 
 problem_number = '076'
@@ -15,13 +13,6 @@ How many different ways can one hundred be written as a sum of at least two posi
 """
 
 sums_dict = {}
-def counting_summations(n):
-    """ first lets do a small number by permuating all numbers """
-
-    sum = 0
-    for i in xrange(n-1, 0, -1):
-        sum += sum_i_to_n(n-i, i) 
-    return sum
 
 def sum_i_to_n(n,i):
     """ this function recursively calculates, number of ways to summing upto n using numbers less than and equal to i """
@@ -39,7 +30,7 @@ def sum_i_to_n(n,i):
     return sum
 
 timeStart = clock()
-print(counting_summations(100))
+print sum_i_to_n(100,99)
 print('Time (sec):' + str(clock() - timeStart))
 answer = '190569291'
 
