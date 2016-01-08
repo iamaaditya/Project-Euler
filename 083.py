@@ -9,10 +9,9 @@ from time import clock
 from collections import defaultdict
 from heapq import heappop, heappush
 from itertools import product
-from sys import maxint
 from numpy import zeros
 
-problem_number = '082'
+problem_number = '083'
 problem_statement = """ Find the minimal path sum, in matrix.txt """
 
 class Graph(object):
@@ -64,20 +63,19 @@ def make_graph(m):
         if c != ncol -1: # no Right for last COL
             g.add_edge((r,c), (r,c+1), m[r,c+1])
 
+        # Add edge for Left
+        if c != 0: # no LEFT for first column
+            g.add_edge((r,c), (r,c-1), m[r,c-1])
+
     return g
 
-def solve_three_ways(m):
+def solve_four_ways(m):
     g = make_graph(m)
 
     nrow, ncol = m.shape
-    min_sum  = maxint
-    for s in xrange(nrow):
-        visited =  Dijkstra(g,(s,0))
-        for e in xrange(nrow):
-            min_sum = min(min_sum, m[s,0] + visited[(e,ncol-1)])
-        
 
-    return min_sum
+    return Dijkstra(g,(0,0))[nrow-1,ncol-1] + m[0,0]
+
 
 
 def read_data(filename):
@@ -94,9 +92,9 @@ def read_data(filename):
     return m
 
 timeStart = clock()
-print solve_three_ways(read_data('./files/p082_matrix.txt'))
+print solve_four_ways(read_data('./files/p083_matrix.txt'))
 print('Time (sec):' + str(clock() - timeStart))
-answer = '260324'
+answer = '425185'
 
 
 
